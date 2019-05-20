@@ -1,0 +1,174 @@
+@keyframes scaleOut {
+  from {
+  }
+  10% {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes scaleStart {
+  from {
+    transform: scale(1.2);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+body {
+  font: 14px 'Century Gothic', Futura, sans-serif;
+  margin: 20px;
+}
+
+.board-row {
+  display: flex;
+  flex: 1;
+}
+
+.status {
+  margin-bottom: 10px;
+}
+
+.square {
+  flex: 1;
+  background: #fff;
+  border: 0.05em solid rgba(0, 206, 209, 0.5);
+  border-radius: 20%;
+  font-size: 20vw;
+  font-weight: bold;
+  line-height: 34px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 1vw;
+  padding: 0;
+  text-align: center;
+  transition: transform 200ms, border-color 200ms;
+}
+
+.hover {
+  color: rgba(0, 206, 209, 0.5);
+}
+
+.square:focus {
+  outline: none;
+}
+
+.kbd-navigation .square:focus {
+  background: #ccc;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 50px auto;
+}
+
+.game-info {
+  margin: 20px auto;
+}
+.game-info > div {
+  font-size: calc(1em + 3vw);
+  text-align: center;
+  transition: transform 600ms, color 300ms, font-weight 100ms;
+}
+.blink {
+  animation: scaleOut 500ms linear 1;
+}
+
+.finished {
+  animation: none;
+  transform: scale(1.5) translateY(-1vmin);
+  color: crimson;
+  font-weight: bold;
+}
+
+.highlight {
+  transform: scale(1.05);
+  border-color: crimson;
+}
+
+.game-board {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 600px;
+}
+
+.history {
+  position: relative;
+}
+
+.history-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.history ul {
+  position: absolute;
+  bottom: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  list-style-type: none;
+  flex-flow: column nowrap;
+  justify-content: center;
+  padding: 0;
+}
+
+.history ul button {
+  padding: 10px;
+  display: block;
+  border-radius: 0.5em;
+  width: 70%;
+  background-color: aquamarine;
+  margin: 1vmin auto;
+  font-size: calc(1em + 1vw);
+  animation: scaleStart 200ms linear 1;
+}
+
+.but {
+  margin: 20px auto;
+  font-size: calc(1em + 3vmin);
+  text-align: center;
+  border-radius: 10px;
+  background-color: darkturquoise;
+  color: #fff;
+  max-width: 400px;
+}
+
+.side {
+  flex: 1;
+}
+.main {
+  margin: auto 1vmin;
+  flex: 5;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .game-board {
+    height: 85vw;
+  }
+  .game {
+    margin: 50px 20px;
+  }
+  .but {
+    font-size: calc(1em + 3vmin);
+  }
+}
+@media (min-width: 600px) {
+  .square {
+    font-size: 150px;
+    margin: 10px;
+  }
+}
