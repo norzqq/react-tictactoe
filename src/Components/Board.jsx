@@ -34,7 +34,7 @@ export default class Board extends React.Component {
 
   render() {
     return (
-      <div className="game-board">
+      <div className={`game-board${this.props.scaled ? ' scaled' : ''}`}>
         {Array(3)
           .fill(null)
           .map((x, i) => this.renderRow(i))}

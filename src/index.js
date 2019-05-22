@@ -47,16 +47,34 @@ class Game extends React.Component {
       stepNumber: 0,
       hoveringSquare: { index: -1, value: null },
       shouldStatusBlink: true,
+      historyOpened: false,
     };
   }
+
+  componentDidMount() {
+    window.addEventListener('mousedown', function(e) {
+      document.body.classList.add('mouse-navigation');
+      document.body.classList.remove('kbd-navigation');
+    });
+    window.addEventListener('keydown', function(e) {
+      if (e.keyCode === 9) {
+        document.body.classList.add('kbd-navigation');
+        document.body.classList.remove('mouse-navigation');
+      }
+    });
+  }
+
+  handleHistoryMenu = (state = !this.state.historyOpened) => {
+    this.setState({ historyOpened: state });
+  };
 
   handleClick = i => {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
-    if (current.status !== 'next') {
+    const squares = [...current.squares];
+    if (current.status !== 'next' || squares[i]) {
       return;
     }
-    const squares = [...current.squares];
     squares[i] = getPlayers(this.state.xIsNext);
     const currentClick = [Math.floor(i / 3) + 1, (i % 3) + 1];
     const squaresToHighlight = calculateWinner(squares);
@@ -119,11 +137,17 @@ class Game extends React.Component {
           onClick={this.handleClick}
           onHover={this.handleHover}
           hoveringSquare={hoveringSquare}
+          scaled={this.state.historyOpened}
         />
-        <History history={history} jumpTo={this.jumpTo} />
+        <History
+          history={history}
+          jumpTo={this.jumpTo}
+          isOpened={this.state.historyOpened}
+          dropdownHandler={() => this.handleHistoryMenu()}
+        />
       </div>
     );
   }
 }
 
-ReactDOM.render(<Game />, document.getElementById('root'));
+ReactDOM.render(<Game />, document.querySelector('[data-role]'));
