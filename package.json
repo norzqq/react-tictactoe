@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "npx gh-pages -d dist",
     "start": "webpack-dev-server --mode development"
   },
   "author": "dmitry kornilov",
+  "homepage": "https://github.com/norzqq/tictactoe",
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.6",
+    "gh-pages": "^2.0.1",
     "lodash": "^4.17.11",
     "normalize.css": "^8.0.1",
     "react": "^16.8.6",

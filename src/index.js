@@ -124,7 +124,7 @@ class Game extends React.Component {
     const current = history[stepNumber];
 
     return (
-      <div className="game">
+      <main className="game">
         <Status
           isBlink={shouldStatusBlink}
           status={current.status}
@@ -145,9 +145,9 @@ class Game extends React.Component {
           isOpened={this.state.historyOpened}
           dropdownHandler={() => this.handleHistoryMenu()}
         />
-      </div>
+      </main>
     );
   }
 }
 
-ReactDOM.render(<Game />, document.querySelector('[data-role]'));
+ReactDOM.render(<Game />, document.getElementById('root'));

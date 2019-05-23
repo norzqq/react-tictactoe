@@ -25,6 +25,33 @@
     opacity: 100;
   }
 }
+body {
+  font: 14px 'Century Gothic', Futura, sans-serif;
+  background: white;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(
+      90deg,
+      rgba(0, 145, 145, 0.1) 0%,
+      rgba(255, 255, 255, 1) 15%,
+      rgba(255, 255, 255, 1) 85%,
+      rgba(0, 145, 145, 0.1) 100%
+    ),
+    url(./plus.svg) repeat;
+  background-size: 100vw 100vh, 10em;
+}
+
+/* #root {
+  height: 100vh;
+  background: linear-gradient(
+    90deg,
+    rgba(156, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 1) 15%,
+    rgba(255, 255, 255, 1) 85%,
+    rgba(156, 255, 255, 0.5) 100%
+  );
+  background-size: 100vw 100vh;
+} */
 
 button {
   padding: 0;
@@ -33,11 +60,6 @@ button {
   color: inherit;
   background-color: transparent;
   cursor: pointer;
-}
-
-body {
-  font: 14px 'Century Gothic', Futura, sans-serif;
-  margin: 20px;
 }
 
 .board-row {
@@ -84,7 +106,8 @@ body {
   display: flex;
   flex-direction: column;
   max-width: 600px;
-  margin: 50px auto;
+  padding: 50px 0 0;
+  margin: 0 auto;
 }
 
 .game-info {
@@ -138,7 +161,6 @@ body {
   bottom: 100%;
   right: 0;
   width: 50%;
-  background-color: rgba(255, 255, 255, 0.7);
   list-style-type: none;
   flex-flow: column nowrap;
   justify-content: center;
@@ -170,8 +192,16 @@ body {
   font-size: calc(1em + 3vmin);
   text-align: center;
   border-radius: 0.3em;
-  background-color: darkturquoise;
+  background-color: #00ced1;
   color: #fff;
+}
+
+.but:hover {
+  background-color: rgb(0, 176, 179);
+}
+
+.but:active {
+  transform: scale(0.98);
 }
 
 .side {
@@ -214,13 +244,10 @@ img {
 
 @media (max-width: 600px) {
   .game-board {
-    height: 85vw;
-  }
-  .game {
-    margin: 50px 20px;
+    height: 95vw;
   }
   .but {
-    font-size: calc(1em + 3vmin);
+    font-size: calc(1.2em + 3vmin);
   }
   .square {
     font-size: 20vw;
@@ -232,10 +259,20 @@ img {
     overflow: hidden;
   }
 }
-/* 
-@media (min-width: 600px) {
-  .square {
-    font-size: 150px;
-    margin: 10px;
+
+@media (max-width: 768px) {
+  .game {
+    padding: 8vmax 1vmax 0;
   }
-} */
+  body {
+    background: linear-gradient(
+        0deg,
+        rgba(0, 145, 145, 0.1) 0%,
+        rgba(255, 255, 255, 1) 10%,
+        rgba(255, 255, 255, 1) 90%,
+        rgba(0, 145, 145, 0.1) 100%
+      ),
+      url(./plus.svg) repeat;
+    background-size: 100vw 100vh, 8em;
+  }
+}
