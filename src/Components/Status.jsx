@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import cn from 'classnames';
 
 const statusStrings = players => ({
@@ -7,22 +7,20 @@ const statusStrings = players => ({
   draw: 'Draw',
 });
 
-export default class Status extends Component {
-  render() {
-    const {
-      isBlink, status, handleAnimationEnd, players,
-    } = this.props;
-    const statusString = statusStrings(players)[status];
-    const classnames = cn({
-      blink: isBlink,
-      finished: status !== 'next',
-    });
-    return (
-      <div className="game-info">
-        <div className={classnames} onAnimationEnd={handleAnimationEnd}>
-          {statusString}
-        </div>
-      </div>
-    );
-  }
-}
+export default (props) => {
+  const {
+    isBlink, status, handleAnimationEnd, players,
+  } = props;
+  const statusString = statusStrings(players)[status];
+  const classnames = cn({
+    blink: isBlink,
+    finished: status !== 'next',
+  });
+  return (
+    <header>
+      <h2 className={classnames} onAnimationEnd={handleAnimationEnd}>
+        {statusString}
+      </h2>
+    </header>
+  );
+};

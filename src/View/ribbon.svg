@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:cc="http://creativecommons.org/ns#" 
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+  xmlns:svg="http://www.w3.org/2000/svg" 
+  xmlns="http://www.w3.org/2000/svg" 
+  xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" 
+  xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" id="Capa_1" x="0px" y="0px" width="506.82932" height="131.91885" viewBox="0 0 313.91048 81.705436" xml:space="preserve" class="" sodipodi:docname="ribbon.svg" inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <metadata id="metadata3840">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs id="defs3838" />
+  <sodipodi:namedview pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-width="1853" inkscape:window-height="1016" id="namedview3836" showgrid="false" inkscape:zoom="1.6328125" inkscape:cx="253.41466" inkscape:cy="212.94507" inkscape:window-x="67" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="g3831" />
+  <g transform="matrix(0.989901,0,0,0.989901,0,-116.10252)" id="g3833">
+    <g id="g3831">
+
+
+
+
+      <g id="g3847">
+        <polygon id="polygon3821" data-old_color="#00F4FF" class="active-path" data-original="#000000" points="317.113,181.092 306.509,157.293 317.113,136.019 291.927,136.019 291.927,181.092 " style="fill:#4aa5af" />
+        <polygon id="polygon3823" data-old_color="#00F4FF" class="active-path" data-original="#000000" points="286.624,181.092 286.624,136.019 286.624,129.111 262.484,129.111 262.484,187.999 286.624,187.999 " style="fill:#4aa5af" />
+        <polygon id="polygon3825" data-old_color="#00F4FF" class="active-path" data-original="#000000" points="0,136.019 10.604,157.956 0,181.092 25.187,181.092 25.187,136.019 " style="fill:#4aa5af" />
+        <polygon id="polygon3827" data-old_color="#00F4FF" class="active-path" data-original="#000000" points="54.629,187.999 54.629,129.111 30.489,129.111 30.489,136.019 30.489,181.092 30.489,187.999 " style="fill:#4aa5af" />
+        <polygon id="polygon3829" data-old_color="#00F4FF" class="active-path" data-original="#000000" points="59.932,129.111 59.932,187.999 59.932,190.65 59.932,193.302 59.932,199.826 257.182,199.826 257.182,193.302 257.182,190.65 257.182,187.999 257.182,129.111 257.182,126.46 257.182,123.809 257.182,117.287 59.932,117.287 59.932,123.809 59.932,126.46 " style="fill:#4aa5af" />
+      </g>
+    </g>
+  </g>
+</svg>

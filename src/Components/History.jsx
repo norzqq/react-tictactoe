@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import refresh from '../css/refresh.svg';
+import refresh from '../View/refresh.svg';
 import cn from 'classnames';
 
 export default class History extends Component {
@@ -14,15 +14,18 @@ export default class History extends Component {
   handleKeyBoardHistoryClick = ({ keyCode: k }) => {
     if ([32, 13].some(n => n === k)) this.props.dropdownHandler();
   };
+
   handleResetAnimation = state => {
     if (this.state.reset !== state) {
       this.setState({ reset: state });
     }
   };
+
   handleResetClick = () => {
     this.props.jumpTo(0);
     this.handleResetAnimation(true);
   };
+
   render() {
     const { history, jumpTo, isOpened, dropdownHandler } = this.props;
 
@@ -39,15 +42,20 @@ export default class History extends Component {
       rotate: this.state.reset,
     });
 
+    const arrowClass = cn({
+      arrow: true,
+      down: isOpened,
+    });
+
     return (
-      <div className="history">
+      <section className="history">
         <div className="history-nav">
-          <button className={'but side'} onClick={this.handleResetClick}>
+          <button className="but side" onClick={this.handleResetClick}>
             <img
               className={rotateClass}
               src={refresh}
               onTransitionEndCapture={() => this.handleResetAnimation(false)}
-              alt="Reset"
+              alt="R"
             />
           </button>
           <button
@@ -62,11 +70,11 @@ export default class History extends Component {
             onKeyDown={this.handleKeyBoardHistoryClick}
             onClick={dropdownHandler}
           >
-            <div className={`arrow${isOpened ? ' down' : ''}`} />
+            <div className={arrowClass} />
           </div>
         </div>
         <ul style={{ visibility: isOpened ? 'visible' : 'hidden' }}>{moves}</ul>
-      </div>
+      </section>
     );
   }
 }

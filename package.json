@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "deploy": "npx gh-pages -d dist",
+    "deploy": "gh-pages -d dist",
     "start": "webpack-dev-server --mode development"
   },
   "author": "dmitry kornilov",
-  "homepage": "https://github.com/norzqq/tictactoe",
+  "homepage": "https://github.com/norzqq/react-tic-tac-toe",
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.6",

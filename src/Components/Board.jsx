@@ -1,44 +1,70 @@
 import React from 'react';
-import Square from './Square';
+import cn from 'classnames';
 
-export default class Board extends React.Component {
-  renderSquare(i) {
+// import Square from './Square';
+
+const Square = (props) => {
+  const {
+    onClick, value, onHoverEnter, onHoverExit, isHover, highlight,
+  } = props;
+  const btnClass = cn({
+    square: true,
+    hover: isHover,
+    highlight,
+  });
+  return (
+    <button
+      className={btnClass}
+      onClick={onClick}
+      onMouseEnter={onHoverEnter}
+      onMouseLeave={onHoverExit}
+    >
+      {value}
+    </button>
+  );
+};
+
+export default (props) => {
+  const renderSquare = (index) => {
     const {
       squares, squaresToHighlight, onClick, onHover, hoveringSquare,
-    } = this.props;
-    const isHover = hoveringSquare.index === i && !squares[i];
-    const value = isHover ? hoveringSquare.value : squares[i];
+    } = props;
+    const isHover = hoveringSquare.index === index && !squares[index];
+    const value = isHover ? hoveringSquare.value : squares[index];
     return (
       <Square
-        highlight={squaresToHighlight && squaresToHighlight.some(s => s === i)}
+        highlight={squaresToHighlight && squaresToHighlight.some(s => s === index)}
         value={value}
-        onClick={() => onClick(i)}
-        onHoverEnter={() => onHover(i)}
+        onClick={() => onClick(index)}
+        onHoverEnter={() => onHover(index)}
         onHoverExit={() => onHover(-1)}
         isHover={isHover}
-        key={i}
+        key={index}
       />
     );
-  }
+  };
 
-  renderRow(r) {
+  const renderRow = (row) => {
     const squares = Array(3)
       .fill(null)
-      .map((x, c) => this.renderSquare(r * 3 + c));
+      .map((x, index) => renderSquare(row * 3 + index));
     return (
-      <div className="board-row" key={r}>
+      <div className="board-row" key={row}>
         {squares}
       </div>
     );
-  }
+  };
 
-  render() {
-    return (
-      <div className={`game-board${this.props.scaled ? ' scaled' : ''}`}>
-        {Array(3)
-          .fill(null)
-          .map((x, i) => this.renderRow(i))}
-      </div>
-    );
-  }
-}
+  const boardClasses = cn({
+    'game-board': true,
+    scaled: props.scaled,
+  });
+
+  return (
+    <section className={boardClasses}>
+      {Array(3)
+        .fill(null)
+        .map((x, index) => renderRow(index))}
+    </section>
+  );
+};
