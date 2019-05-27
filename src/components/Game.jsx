@@ -160,12 +160,12 @@ export default class Game extends React.Component {
           <ul>
             <li>
               <a href="mailto:someone@example.com" rel="contact">
-                <i class="fas fa-envelope" />
+                <i className="fas fa-envelope" />
               </a>
             </li>
             <li>
               <a href="https://github.com/norzqq/react-tic-tac-toe" rel="author">
-                <i class="fab fa-github" />
+                <i className="fab fa-github" />
               </a>
             </li>
           </ul>
