@@ -15,7 +15,7 @@ export default class History extends Component {
     if ([32, 13].some(n => n === k)) this.props.dropdownHandler();
   };
 
-  handleResetAnimation = state => {
+  handleResetAnimation = state => e => {
     if (this.state.reset !== state) {
       this.setState({ reset: state });
     }
@@ -54,7 +54,7 @@ export default class History extends Component {
             <img
               className={rotateClass}
               src={refresh}
-              onTransitionEndCapture={() => this.handleResetAnimation(false)}
+              onTransitionEnd={this.handleResetAnimation(false)}
               alt="R"
             />
           </button>
@@ -68,7 +68,7 @@ export default class History extends Component {
             tabIndex={0}
             className="but side"
             onKeyDown={this.handleKeyBoardHistoryClick}
-            onClick={dropdownHandler}
+            onClick={dropdownHandler()}
           >
             <div className={arrowClass} />
           </div>

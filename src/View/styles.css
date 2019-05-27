@@ -1,3 +1,4 @@
+/* CSS v1.3 */
 :root {
   --main-theme-alpha: rgba(0, 206, 209, 0.5);
   --main-theme: rgba(0, 206, 209, 1);
@@ -57,10 +58,10 @@ body {
   justify-content: center;
 }
 
-/* STATUS */
+/* Game status */
 .game header {
   text-align: center;
-  margin-bottom: 10px;
+  margin: 1em auto;
 }
 
 h2 {
@@ -125,6 +126,8 @@ h2 {
 h1 {
   text-align: center;
   font: bold calc(1.5em + 2vmin) serif;
+  font-family: 'PT Serif Caption', 'PT Serif', Georgia, Times, 'Times New Roman',
+    serif;
   padding: 1rem 0;
   color: white;
 }
@@ -312,5 +315,9 @@ button {
 
   .history ul button {
     margin: 0.3vmin auto;
+  }
+
+  .container {
+    height: 95vh;
   }
 }

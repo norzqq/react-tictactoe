@@ -4,10 +4,12 @@ import History from './History';
 import Status from './Status';
 import '../View/normalize.css';
 import '../View/styles.css';
+import _ from 'lodash';
 
-const getPlayers = (xIsNext, both = false) => {
-  const sorted = xIsNext ? ['X', 'O'] : ['O', 'X'];
-  return both ? sorted : sorted[0];
+const getPlayers = (isPlayerOneMove, both = false) => {
+  const values = ['X', 'O'];
+  const sorted = isPlayerOneMove ? values : _.reverse(values);
+  return both ? sorted : _.head(sorted);
 };
 
 const calculateWinner = squares => {
@@ -21,13 +23,12 @@ const calculateWinner = squares => {
     [0, 4, 8],
     [2, 4, 6],
   ];
-  for (let i = 0; i < lines.length; i += 1) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return lines[i];
-    }
-  }
-  return null;
+  const result = lines.find(line =>
+    line
+      .map(index => squares[index])
+      .every((value, i, arr) => value !== null && value === _.head(arr)),
+  );
+  return result;
 };
 
 export default class Game extends React.Component {
@@ -43,7 +44,7 @@ export default class Game extends React.Component {
           squaresToHighlight: null,
         },
       ],
-      xIsNext: true,
+      isPlayerOneMove: true,
       stepNumber: 0,
       hoveringSquare: { index: -1, value: null },
       shouldStatusBlink: true,
@@ -66,19 +67,19 @@ export default class Game extends React.Component {
     });
   }
 
-  handleHistoryMenu = (state = !this.state.historyOpened) => {
+  handleHistoryMenu = (state = !this.state.historyOpened) => e => {
     this.setState({ historyOpened: state });
   };
 
   // Square click
   handleClick = i => {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    const current = history[history.length - 1];
+    const current = _.last(history);
     const squares = [...current.squares];
     if (current.status !== 'next' || squares[i]) {
       return;
     }
-    squares[i] = getPlayers(this.state.xIsNext);
+    squares[i] = getPlayers(this.state.isPlayerOneMove);
     const currentClick = [Math.floor(i / 3) + 1, (i % 3) + 1];
     const squaresToHighlight = calculateWinner(squares);
     let status;
@@ -100,18 +101,18 @@ export default class Game extends React.Component {
       ]),
       hoveringSquare: { index: -1, value: null },
       stepNumber: history.length,
-      xIsNext: !this.state.xIsNext,
+      isPlayerOneMove: !this.state.isPlayerOneMove,
       shouldStatusBlink: true,
     });
   };
   handleHover = i => {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    const current = history[history.length - 1];
+    const current = _.last(history);
     if (current.status !== 'next') {
       return;
     }
     this.setState({
-      hoveringSquare: { index: i, value: getPlayers(this.state.xIsNext) },
+      hoveringSquare: { index: i, value: getPlayers(this.state.isPlayerOneMove) },
     });
   };
 
@@ -120,11 +121,11 @@ export default class Game extends React.Component {
   };
 
   jumpTo = step => {
-    this.setState({ stepNumber: step, xIsNext: step % 2 === 0 });
+    this.setState({ stepNumber: step, isPlayerOneMove: step % 2 === 0 });
   };
 
   render() {
-    const { history, stepNumber, xIsNext, hoveringSquare, shouldStatusBlink } = this.state;
+    const { history, stepNumber, isPlayerOneMove, hoveringSquare, shouldStatusBlink } = this.state;
     const current = history[stepNumber];
 
     return (
@@ -137,7 +138,7 @@ export default class Game extends React.Component {
             isBlink={shouldStatusBlink}
             status={current.status}
             handleAnimationEnd={this.handleAnimationEnd}
-            players={getPlayers(xIsNext, true)}
+            players={getPlayers(isPlayerOneMove, true)}
           />
           <Board
             squares={current.squares}
@@ -151,7 +152,7 @@ export default class Game extends React.Component {
             history={history}
             jumpTo={this.jumpTo}
             isOpened={this.state.historyOpened}
-            dropdownHandler={() => this.handleHistoryMenu()}
+            dropdownHandler={this.handleHistoryMenu}
           />
         </main>
         <footer>

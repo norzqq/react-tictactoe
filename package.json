@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "npx webpack --config webpack.config.js",
     "deploy": "gh-pages -d dist",
     "start": "webpack-dev-server --mode development"
   },
