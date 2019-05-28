@@ -1,4 +1,13 @@
-# Tic-Tac-Toe
-An enhancement of the official react tutorial - tictactoe game. Adaptive, interactive, beautifull :3
+# Tic-Tac-Toe Game
 
-[Hosted app](https://norzqq.github.io/react-tic-tac-toe/)
+## React+Redux
+
+Just for practising.
+
+```
+clone
+npm install
+npm start
+```
+
+[GH-PAGES DEMO](https://norzqq.github.io/react-tic-tac-toe/)

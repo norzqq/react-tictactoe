@@ -1,49 +1,16 @@
 import React from 'react';
 import cn from 'classnames';
 import { connect } from 'react-redux';
+import Square from './Square';
 
-// import Square from './Square';
+const mapStateToProps = state => ({
+  scaled: state.historyOpened,
+});
 
-const Square = (props) => {
-  const {
-    onClick, value, onHoverEnter, onHoverExit, isHover, highlight,
-  } = props;
-  const btnClass = cn({
-    square: true,
-    hover: isHover,
-    highlight,
-  });
-  return (
-    <button
-      className={btnClass}
-      onClick={onClick}
-      onMouseEnter={onHoverEnter}
-      onMouseLeave={onHoverExit}
-    >
-      {value}
-    </button>
-  );
-};
+// const actionCreators = {};
 
-export default (props) => {
-  const renderSquare = (index) => {
-    const {
-      squares, squaresToHighlight, onClick, onHover, hoveringSquare,
-    } = props;
-    const isHover = hoveringSquare.index === index && !squares[index];
-    const value = isHover ? hoveringSquare.value : squares[index];
-    return (
-      <Square
-        highlight={squaresToHighlight && squaresToHighlight.some(s => s === index)}
-        value={value}
-        onClick={() => onClick(index)}
-        onHoverEnter={() => onHover(index)}
-        onHoverExit={() => onHover(-1)}
-        isHover={isHover}
-        key={index}
-      />
-    );
-  };
+const Board = (props) => {
+  const renderSquare = index => <Square index={index} key={index} />;
 
   const renderRow = (row) => {
     const squares = Array(3)
@@ -69,3 +36,5 @@ export default (props) => {
     </section>
   );
 };
+
+export default connect(mapStateToProps)(Board);

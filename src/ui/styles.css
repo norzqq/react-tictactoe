@@ -80,7 +80,7 @@ h2 {
 
 .finished {
   animation: none;
-  transform: scale(1.2) translateY(-0.5vmin);
+  transform: scale(1.1) translateY(-0.5vmin);
   color: crimson;
   font-weight: bold;
 }
@@ -188,6 +188,7 @@ button {
   animation: scaleStart 200ms linear 1;
   overflow: hidden;
   white-space: nowrap;
+  transition: transform 100ms;
 }
 
 .history ul button:hover {
@@ -301,7 +302,7 @@ button {
   }
 }
 
-/* Adaptive */
+/* Responsive */
 @media (max-width: 768px) {
   .container > header,
   .container > footer,

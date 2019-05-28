@@ -1,50 +1,67 @@
 import React, { Component } from 'react';
-import refresh from '../View/refresh.svg';
+import refresh from '../ui/refresh.svg';
 import cn from 'classnames';
+import { connect } from 'react-redux';
+import _ from 'lodash';
+import * as actions from '../actions';
 
-export default class History extends Component {
-  constructor(props) {
-    super(props);
+const mapStateToProps = state => state;
 
-    this.state = {
-      reset: false,
-    };
-  }
+const actionCreators = {
+  jumpTo: actions.jumpTo,
+  toggleHistoryMenu: actions.toggleHistoryMenu,
+};
 
-  handleKeyBoardHistoryClick = ({ keyCode: k }) => {
-    if ([32, 13].some(n => n === k)) this.props.dropdownHandler();
+class History extends Component {
+  state = {
+    playResetAnimation: false,
   };
 
-  handleResetAnimation = state => e => {
-    if (this.state.reset !== state) {
-      this.setState({ reset: state });
+  handleKeyBoardHistoryClick = ({ keyCode: k }) => {
+    if ([32, 13].some(n => n === k)) this.props.toggleHistoryMenu();
+  };
+
+  handleResetAnimation = state => {
+    if (this.state.playResetAnimation !== state) {
+      this.setState({ playResetAnimation: state });
     }
   };
 
   handleResetClick = () => {
-    this.props.jumpTo(0);
+    this.props.jumpTo({ step: 0 });
     this.handleResetAnimation(true);
   };
 
+  handleUndoClick = () => {
+    const { jumpTo, stepNumber } = this.props;
+    if (stepNumber > 0) {
+      jumpTo({ step: stepNumber - 1 });
+    }
+  };
   render() {
-    const { history, jumpTo, isOpened, dropdownHandler } = this.props;
+    const { history, jumpTo, historyOpened, stepNumber, toggleHistoryMenu } = this.props;
 
     const moves = history.map((step, move) => {
-      const desc = move ? `${move} move, coords: [${step.currentClick}]` : 'Start';
+      const desc = move ? `${move} move, coords: [${step.clickCoords}]` : 'Start';
+      const buttonClass = cn({
+        finished: move === stepNumber,
+      });
       return (
-        <li key={move} className={isOpened ? 'show' : ''}>
-          <button onClick={() => jumpTo(move)}>{desc}</button>
+        <li key={move} className={historyOpened ? 'show' : ''}>
+          <button className={buttonClass} onClick={() => jumpTo({ step: move })}>
+            {desc}
+          </button>
         </li>
       );
     });
 
     const rotateClass = cn({
-      rotate: this.state.reset,
+      rotate: this.state.playResetAnimation,
     });
 
     const arrowClass = cn({
       arrow: true,
-      down: isOpened,
+      down: historyOpened,
     });
 
     return (
@@ -54,27 +71,29 @@ export default class History extends Component {
             <img
               className={rotateClass}
               src={refresh}
-              onTransitionEnd={this.handleResetAnimation(false)}
+              onTransitionEnd={() => this.handleResetAnimation(false)}
               alt="R"
             />
           </button>
-          <button
-            className="but main"
-            onClick={history.length > 1 ? () => jumpTo(history.length - 2) : () => {}}
-          >
-            Undo last move
+          <button className="but main" onClick={this.handleUndoClick}>
+            Undo
           </button>
           <div
             tabIndex={0}
             className="but side"
             onKeyDown={this.handleKeyBoardHistoryClick}
-            onClick={dropdownHandler()}
+            onClick={toggleHistoryMenu}
           >
             <div className={arrowClass} />
           </div>
         </div>
-        <ul style={{ visibility: isOpened ? 'visible' : 'hidden' }}>{moves}</ul>
+        <ul style={{ visibility: historyOpened ? 'visible' : 'hidden' }}>{moves}</ul>
       </section>
     );
   }
 }
+
+export default connect(
+  mapStateToProps,
+  actionCreators,
+)(History);
