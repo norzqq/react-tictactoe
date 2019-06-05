@@ -4,13 +4,13 @@ import _ from 'lodash';
 import * as actions from '../actions';
 
 // Utility function: Get symbol value to fill a square
-const getNewPlayersOrder = (players) => {
+const getNewPlayersOrder = players => {
   const [first, ...rest] = players;
   return [...rest, first];
 };
 
 // Utility function: Hardcoded lines to compare values inside
-const calculateWinner = (squares) => {
+const calculateWinner = squares => {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -19,12 +19,14 @@ const calculateWinner = (squares) => {
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-    [2, 4, 6],
+    [2, 4, 6]
   ];
-  // Its functional programming baby
-  const result = lines.find(line => line
-    .map(index => squares[index])
-    .every((value, i, arr) => value !== null && value === _.head(arr)));
+
+  const result = lines.find(line =>
+    line
+      .map(index => squares[index])
+      .every((value, i, arr) => value !== null && value === _.head(arr))
+  );
   return result;
 };
 
@@ -36,11 +38,11 @@ const initState = {
       clickCoords: [null, null],
       status: 'next',
       squaresToHighlight: null,
-      players: ['X', 'O'],
-    },
+      players: ['X', 'O']
+    }
   ],
   stepNumber: 0,
-  historyOpened: false,
+  historyOpened: false
 };
 
 const gamestate = handleActions(
@@ -49,8 +51,8 @@ const gamestate = handleActions(
     [actions.clickSquare](
       state,
       {
-        payload: { index },
-      },
+        payload: { index }
+      }
     ) {
       const history = state.history.slice(0, state.stepNumber + 1);
       const current = _.last(history);
@@ -80,32 +82,32 @@ const gamestate = handleActions(
             squaresToHighlight,
             clickCoords,
             status,
-            players,
-          },
+            players
+          }
         ]),
-        stepNumber: history.length,
+        stepNumber: history.length
       };
     },
     // Alter current history step
     [actions.jumpTo](
       state,
       {
-        payload: { step },
-      },
+        payload: { step }
+      }
     ) {
       return {
         ...state,
-        stepNumber: step,
+        stepNumber: step
       };
     },
     [actions.toggleHistoryMenu](state) {
       return {
         ...state,
-        historyOpened: !state.historyOpened,
+        historyOpened: !state.historyOpened
       };
-    },
+    }
   },
-  initState,
+  initState
 );
 
 export default gamestate;
