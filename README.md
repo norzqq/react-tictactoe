@@ -10,4 +10,4 @@ npm install
 npm start
 ```
 
-[GH-PAGES DEMO](https://norzqq.github.io/react-tic-tac-toe/)
+[GH-PAGES DEMO](https://dkornilove.github.io/react-tic-tac-toe/)
